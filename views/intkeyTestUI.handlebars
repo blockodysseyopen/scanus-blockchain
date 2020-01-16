@@ -1,0 +1,61 @@
+<div class="container-fluid" onload="">
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- form start-->
+            <div class="wrapper">
+            <form class="form-container">
+                <div class="form-group">
+                    <label style="color: white; font-family:'Open Sans', sans-serif;font-weight: normal; font-size: 25px;">
+                    verb<input type="text" class="form-control" id="verb" placeholder="set/inc/dec">
+                    name<input type="text" class="form-control" id="name" placeholder="">
+                    value<input type="number" class="form-control" id="amt" placeholder="">
+                </div>
+                <center><button type="submit" style="color:white; align:center;" class="btn btn-lg" onclick="sendTest()">send</button></center>
+                <center><button type="submit" style="color:white; align:center;" class="btn btn-lg" onclick="showTest()">show</button></center>
+                </form>
+            </div>
+            <!-- form end-->
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+    </div>
+</div>
+<script src="../js/main.js"></script>
+<script type="text/javascript">
+        $(".nav").find(".active").removeClass("active");
+        $('#testui').addClass("active");
+       function sendTest() {
+            var verb = document.getElementById("verb").value;
+            var name = document.getElementById("name").value;
+            var value = document.getElementById("amt").value;
+            if (verb.length === 0) {
+                alert("please enter verb");
+            }
+            else if (name.length === 0) {
+                alert("please enter name");
+            }
+            else if (value.length === 0) {
+                alert("please enter value");
+            }
+            else {
+                $.post('/send', { verb: verb, name: name, value:value },
+                    'json');
+            }
+        }
+
+        function showTest() {
+            var name = document.getElementById("name").value;
+             if (name.length === 0) {
+                alert("please enter name");
+            }else {
+                
+                  $.post("/show", {  name: name }
+                  , function(result){
+                        alert(result);
+                        alert(result.data);
+                    },
+                'json');
+            }
+        }
+        
+</script>

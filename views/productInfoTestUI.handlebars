@@ -1,0 +1,122 @@
+<div class="container-fluid" onload="">
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- form start-->
+            <div class="wrapper">
+            <form class="form-container" id="form-scope">
+                <div class="form-group">
+                    <label style="color: white; font-family:'Open Sans', sans-serif;font-weight: normal; font-size: 25px;">
+                    nameForAddress<input type="text" class="form-control" id="nameForAddress" name="nameForAddress" placeholder="">
+                    productCode<input type="text" class="form-control" id="productCode" name="productCode" placeholder="">
+                    creatorCode<input type="text" class="form-control" id="creatorCode" name="creatorCode" placeholder="">
+                    action<input type="text" class="form-control" id="action" name="action" placeholder="create/modify">
+                    productDetail<input type="text" class="form-control" id="productDetail" name="productDetail" placeholder="">
+                </div>
+                <center><button type="submit" style="color:white; align:center;" class="btn btn-lg" onclick="sendTest()">send</button></center>
+                <center><button type="submit" style="color:white; align:center;" class="btn btn-lg" onclick="showProductInfoState()">showProductInfoState</button></center>
+                <center><button type="submit" style="color:white; align:center;" class="btn btn-lg" onclick="showProductObjectState()">showProductObjectState</button></center>
+                <center><button type="submit" style="color:white; align:center;" class="btn btn-lg" onclick="showAccessKeyState()">showAccessKeyState</button></center>
+                <center><button type="submit" style="color:white; align:center;" class="btn btn-lg" onclick="showTransitionRuleState()">showTransitionRuleState</button></center>
+                </form>
+            </div>
+            <!-- form end-->
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+    </div>
+</div>
+<script src="../js/main.js"></script>
+<script type="text/javascript">
+        $(".nav").find(".active").removeClass("active");
+        $('#testui').addClass("active");
+       function sendTest() {
+           var formData = $("#form-scope").serializeArray();
+            var nameForAddress = document.getElementById("nameForAddress").value;
+            var productCode = document.getElementById("productCode").value;
+            var creatorCode = document.getElementById("creatorCode").value;
+            var action = document.getElementById("action").value;
+            var productDetail = document.getElementById("productDetail").value;
+            if (nameForAddress.length === 0) {
+                alert("please enter nameForAddress");
+            }
+            else if (productCode.length === 0) {
+                alert("please enter productCode");
+            }
+            else if (creatorCode.length === 0) {
+                alert("please enter creatorCode");
+            }
+            else if (action.length === 0) {
+                alert("please enter action");
+            }
+            else if (productDetail.length === 0) {
+                alert("please enter productDetail");
+            }
+            else {
+                $.post('/sendProductInfoClient', formData,
+                    'json');
+            }
+        }
+
+        function showProductInfoState() {
+            var nameForAddress = document.getElementById("nameForAddress").value;
+             if (nameForAddress.length === 0) {
+                alert("please enter nameForAddress");
+            }else {
+                
+                  $.post("/showProductInfoClient", {  nameForAddress: nameForAddress }
+                  , function(result){
+                        alert(result);
+                        alert(result.data);
+                    },
+                'json');
+            }
+        }
+
+
+        function showTransitionRuleState() {
+            var nameForAddress = document.getElementById("nameForAddress").value;
+             if (nameForAddress.length === 0) {
+                alert("please enter nameForAddress");
+            }else {
+                  $.post("/showTransitionRuleClient", {  nameForAddress: nameForAddress }
+                  , function(result){
+                        alert(result);
+                        alert(result.data);
+                    },
+                'json');
+            }
+        }
+        
+
+        function showProductObjectState() {
+            var nameForAddress = document.getElementById("nameForAddress").value;
+             if (nameForAddress.length === 0) {
+                alert("please enter nameForAddress");
+            }else {
+                  $.post("/showProductObjectState", {  nameForAddress: nameForAddress }
+                  , function(result){
+                        alert(result);
+                        alert(result.data);
+                    },
+                'json');
+            }
+        }
+
+        function showAccessKeyState() {
+            var nameForAddress = document.getElementById("nameForAddress").value;
+             if (nameForAddress.length === 0) {
+                alert("please enter nameForAddress");
+            }else {
+                  $.post("/showAccessKeyState", {  nameForAddress: nameForAddress }
+                  , function(result){
+                        alert(result);
+                        alert(result.data);
+                    },
+                'json');
+            }
+        }
+
+
+
+        
+</script>
